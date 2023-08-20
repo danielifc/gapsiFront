@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h2 class="mb-3 text-center">Administración de Proveedores</h2>
+</div>
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="container mt-5">
+  <div class="text-end">
+    <button class="btn btn-primary text" routerLink="/add-proveedor">Agregar elemento</button>
+    <br>
+    <br>
+  </div>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Razón Social</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of proveedores |
+        paginate: {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: totalElements
+          }
+      ">
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.razonSocial }}</td>
+        <td>{{ proveedor.direccion }}</td>
+        <td><button class="btn btn-danger" (click)="deleteProveedor(proveedor.id)">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-end">
+  <pagination-controls
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+    (pageChange)="changePage((page = $event))"></pagination-controls>
+</div>

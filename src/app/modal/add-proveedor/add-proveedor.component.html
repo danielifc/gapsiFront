@@ -1,0 +1,32 @@
+<h1>Agregar Proveedor</h1>
+
+<div class="container">
+		<div class="alert alert-warning" *ngIf="error">{{errorMessage}}</div>
+    <div class="alert alert-warning" *ngIf="proveedorForm.dirty && proveedorForm.invalid">Favor de proporcionar valores válidos</div>
+    <div class="alert alert-warning" *ngIf="proveedorForm.dirty && nombre.invalid">El campo Nombre es obligatorio</div>
+    <div class="alert alert-warning" *ngIf="proveedorForm.dirty && razonSocial.invalid">El campo Razón Social es obligatorio</div>
+    <div class="alert alert-warning" *ngIf="proveedorForm.dirty && direccion.invalid">El campo Dirección es obligatorio</div>		
+		<form (ngSubmit)="!proveedorForm.invalid && saveProveedor()" #proveedorForm="ngForm">		
+        <fieldset class="form-group">
+            <label>Nombre</label>
+            <input type="text" #nombre="ngModel" class="form-control" name="nombre" required="required" minlength="5" [(ngModel)] = "proveedor.nombre">
+        </fieldset>
+
+        <fieldset class="form-group">
+					<label>Razón Social</label>
+					<input type="text" #razonSocial="ngModel" class="form-control" name="razonSocial" required="required" minlength="5" [(ngModel)] = "proveedor.razonSocial">
+			</fieldset>
+			
+			<fieldset class="form-group">
+				<label>Dirección</label>
+				<input type="text" #direccion="ngModel" class="form-control" name="direccion" required="required" minlength="5" [(ngModel)] = "proveedor.direccion">
+			</fieldset>
+    </form>
+</div>
+<br>
+<div>
+	<button type="submit" class="btn btn-danger" routerLink="/lista-proveedores">Cancelar</button>
+	&nbsp;
+	&nbsp;
+	<button type="submit" class="btn btn-primary">Guardar Proveedor</button>
+</div>
